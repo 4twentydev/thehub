@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: "Inter", "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-foreground) 15%, transparent);
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 210 40% 98%;
+    --muted: 240 5% 22%;
+    --muted-foreground: 215 20% 65%;
+    --card: 240 10% 6%;
+    --card-foreground: 210 40% 98%;
+    --border: 240 6% 20%;
+    --accent: 265 72% 70%;
+  }
+
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 16% 46%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --border: 214 32% 91%;
+    --accent: 262 83% 58%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: linear-gradient(135deg, color-mix(in srgb, hsl(var(--background)) 80%, transparent), transparent);
+    backdrop-filter: blur(16px);
+    border: 1px solid color-mix(in srgb, hsl(var(--border)) 70%, transparent);
+  }
+}
