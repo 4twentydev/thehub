@@ -8,12 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { projects } from "@/lib/sample-data";
 
 interface AdminProjectPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function AdminProjectPage({ params }: AdminProjectPageProps) {
   await requireOwner();
-  const project = projects.find((item) => item.id === params.id);
+  const { id } = await params;
+  const project = projects.find((item) => item.id === id);
 
   if (!project) {
     notFound();
