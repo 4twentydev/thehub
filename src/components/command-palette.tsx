@@ -42,6 +42,26 @@ export function CommandPalette() {
                 </CommandItem>
               ))}
             </CommandGroup>
+            <CommandGroup heading="Assembly">
+              <CommandItem
+                value="assembly dashboard metrics"
+                onSelect={() => {
+                  setOpen(false);
+                  router.push("/admin/assembly");
+                }}
+              >
+                Assembly Dashboard
+              </CommandItem>
+              <CommandItem
+                value="assembly tv display shop floor"
+                onSelect={() => {
+                  setOpen(false);
+                  router.push("/assembly/tv");
+                }}
+              >
+                Assembly TV Display
+              </CommandItem>
+            </CommandGroup>
             <CommandGroup heading="Owner actions">
               <CommandItem
                 value="new project"
