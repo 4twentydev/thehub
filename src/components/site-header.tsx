@@ -23,6 +23,9 @@ export function SiteHeader() {
           <Link href="/projects" className="transition hover:text-foreground">
             Projects
           </Link>
+          <Link href="/admin/assembly" className="transition hover:text-foreground">
+            Assembly
+          </Link>
           <Link href="/admin" className="transition hover:text-foreground">
             Owner Mode
           </Link>

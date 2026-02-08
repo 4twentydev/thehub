@@ -1,6 +1,8 @@
 import {
   boolean,
+  date,
   integer,
+  numeric,
   pgTable,
   primaryKey,
   serial,
@@ -148,5 +150,45 @@ export const changelog = pgTable("changelog", {
     .references(() => projects.id, { onDelete: "cascade" }),
   title: text("title").notNull(),
   body: text("body").notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull()
+});
+
+// --------------- Assembly Metrics ---------------
+
+export const assemblyMembers = pgTable("assembly_members", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  role: text("role").notNull().default("assembler"),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull()
+});
+
+export const assemblyJobs = pgTable("assembly_jobs", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description"),
+  status: text("status").notNull().default("pending"),
+  targetQuantity: integer("target_quantity").notNull(),
+  completedQuantity: integer("completed_quantity").notNull().default(0),
+  unit: text("unit").notNull().default("units"),
+  startDate: date("start_date", { mode: "string" }),
+  dueDate: date("due_date", { mode: "string" }),
+  createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { mode: "date" }).defaultNow().notNull()
+});
+
+export const assemblyLogs = pgTable("assembly_logs", {
+  id: serial("id").primaryKey(),
+  memberId: integer("member_id")
+    .notNull()
+    .references(() => assemblyMembers.id, { onDelete: "cascade" }),
+  jobId: integer("job_id")
+    .notNull()
+    .references(() => assemblyJobs.id, { onDelete: "cascade" }),
+  quantity: integer("quantity").notNull(),
+  defects: integer("defects").notNull().default(0),
+  hoursWorked: numeric("hours_worked", { precision: 4, scale: 2 }).notNull(),
+  notes: text("notes"),
+  shiftDate: date("shift_date", { mode: "string" }).notNull(),
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull()
 });
