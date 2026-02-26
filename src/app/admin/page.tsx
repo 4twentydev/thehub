@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ClipboardList, Settings, Wrench } from "lucide-react";
+import { ClipboardList, Hammer, Settings, Wrench } from "lucide-react";
 
 import { requireOwner } from "@/lib/require-owner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,7 +15,20 @@ export default async function AdminPage() {
         <p className="text-sm text-muted-foreground">Quick controls for projects, tools, and dependencies.</p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="border-border/60 bg-card/80">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Hammer className="h-4 w-4" /> Assembly
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-muted-foreground">
+            <p>Track team output and quality.</p>
+            <Link href="/admin/assembly" className="text-accent">
+              Assembly dashboard
+            </Link>
+          </CardContent>
+        </Card>
         <Card className="border-border/60 bg-card/80">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
